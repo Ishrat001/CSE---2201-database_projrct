@@ -106,7 +106,7 @@ export default function CustomerLandingPage() {
       <div
         className={`fixed inset-y-0 left-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out bg-white shadow-lg w-64 z-50`}
+        } transition-transform duration-300 ease-in-out bg-black shadow-lg w-64 z-50`}
       >
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="text-xl font-bold">Menu</h2>

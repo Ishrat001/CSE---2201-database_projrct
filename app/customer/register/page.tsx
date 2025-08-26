@@ -71,13 +71,11 @@ export default function AuthModal() {
 
   return (
     <div className="relative h-screen w-screen">
-      {/* Background blur */}
-      <div className="absolute inset-0 bg-[url('/bg.jpg')] bg-cover bg-center blur-sm" />
-      <div className="absolute inset-0 bg-black bg-opacity-50" />
+      
 
       {/* Modal Box */}
       <div className="relative flex items-center justify-center h-full">
-        <div className="bg-white p-6 rounded-2xl shadow-lg w-[90%] max-w-md">
+        <div className="bg-black p-6 rounded-2xl shadow-lg w-[90%] max-w-md">
           <h2 className="text-2xl font-bold mb-4 text-center">
             {isRegister ? "Register" : "Login"}
           </h2>

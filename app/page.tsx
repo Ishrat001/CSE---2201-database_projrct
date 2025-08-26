@@ -9,7 +9,7 @@ export default function HomePage() {
   
   const roles = [
     { name: "Customer", color: "bg-blue-500", path: "/customer/register" },
-    { name: "Manager", color: "bg-red-500", path: "/manager" },
+    { name: "Manager", color: "bg-red-500", path: "/manager/register" },
     { name: "Employee", color: "bg-green-500", path: "/employee/register" },
   ];
 

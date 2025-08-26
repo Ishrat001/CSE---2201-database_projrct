@@ -108,7 +108,7 @@ export default function EmployeeLandingPage() {
       <div
         className={`fixed inset-y-0 left-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out bg-white shadow-lg w-64 z-50`}
+        } transition-transform duration-300 ease-in-out bg-black shadow-lg w-64 z-50`}
       >
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="text-lg font-bold">Menu</h2>
@@ -119,19 +119,19 @@ export default function EmployeeLandingPage() {
         </div>
         <nav className="flex flex-col p-4 space-y-3">
           <button
-            onClick={() => router.push("/inventory")}
+            onClick={() => router.push("/employee/inventory")}
             className="text-left px-3 py-2 hover:bg-gray-100 rounded"
           >
             Inventory
           </button>
           <button
-            onClick={() => router.push("/orders")}
+            onClick={() => router.push("/employee/orders")}
             className="text-left px-3 py-2 hover:bg-gray-100 rounded"
           >
             Orders
           </button>
           <button
-            onClick={() => router.push("/products")}
+            onClick={() => router.push("/employee/products")}
             className="text-left px-3 py-2 hover:bg-gray-100 rounded"
           >
             Products
