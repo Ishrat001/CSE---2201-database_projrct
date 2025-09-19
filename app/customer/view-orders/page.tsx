@@ -37,37 +37,71 @@ export default function ViewOrdersPage() {
     fetchOrders();
   }, []);
 
-  if (loading) return <p className="p-6">Loading your orders...</p>;
+  if (loading) return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p className="mt-4 text-gray-700">Loading your orders...</p>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Your Orders</h1>
-      {orders.length === 0 ? (
-        <p>No orders found.</p>
-      ) : (
-        <table className="w-full border-collapse border">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-2">Order ID</th>
-              <th className="border p-2">Product</th>
-              <th className="border p-2">Quantity</th>
-              <th className="border p-2">Total Price</th>
-              <th className="border p-2">Order Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order.id} className="text-center">
-                <td className="border p-2">{order.id}</td>
-                <td className="border p-2">{order.product_name}</td>
-                <td className="border p-2">{order.quantity}</td>
-                <td className="border p-2">${order.total_price}</td>
-                <td className="border p-2">{order.order_date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8 mt-10">
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-3xl font-bold text-gray-800">Your Orders</h1>
+            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+            </div>
+          </div>
+          
+          {orders.length === 0 ? (
+            <div className="text-center py-12">
+              <svg className="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="mt-4 text-xl font-medium text-gray-900">No orders yet</h3>
+              <p className="mt-2 text-gray-500">You haven&apos;t placed any orders yet.</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto rounded-xl shadow-inner">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                    <th className="p-4 text-left rounded-tl-xl">Order ID</th>
+                    <th className="p-4 text-left">Product</th>
+                    <th className="p-4 text-left">Quantity</th>
+                    <th className="p-4 text-left">Total Price</th>
+                    <th className="p-4 text-left rounded-tr-xl">Order Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order, index) => (
+                    <tr 
+                      key={order.id} 
+                      className={`
+                        ${index % 2 === 0 ? 'bg-white' : 'bg-blue-50'} 
+                        transition-colors hover:bg-blue-100
+                        ${index === orders.length - 1 ? 'rounded-b-xl' : ''}
+                      `}
+                    >
+                      <td className="p-4 border-b border-gray-200">{order.id}</td>
+                      <td className="p-4 border-b border-gray-200 font-medium">{order.product_name}</td>
+                      <td className="p-4 border-b border-gray-200">{order.quantity}</td>
+                      <td className="p-4 border-b border-gray-200 font-semibold">${order.total_price.toFixed(2)}</td>
+                      <td className="p-4 border-b border-gray-200">{new Date(order.order_date).toLocaleDateString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
