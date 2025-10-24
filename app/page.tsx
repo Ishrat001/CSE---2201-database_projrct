@@ -19,7 +19,7 @@ export default function HomePage() {
   },
   { 
     name: "Employee", 
-    color: "bg-lime-500 hover:bg-lime-400 shadow-lg shadow-lime-500/30", 
+    color: "bg-purple-500 hover:bg-pluple-400 shadow-lg shadow-purple-500/30", 
     path: "/employee/register" 
   },
 ];
@@ -241,13 +241,6 @@ export default function HomePage() {
       <div className="flex flex-wrap justify-center gap-8">
         {/* Developer 1 */}
         <div className="text-center">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white-500 mx-auto mb-4">
-            <img 
-              src="/images/developer1.jpg" 
-              alt="Developer 1" 
-              className="w-full h-full object-cover"
-            />
-          </div>
           <h5 className="font-semibold">Ishrat Jahan Mim</h5>
           <p className="text-gray-400 text-sm">Lead Developer</p>
           <p className="text-gray-400 text-sm">ishratcsedu29@gmail.com</p>
@@ -256,13 +249,6 @@ export default function HomePage() {
         
         {/* Developer 2 */}
         <div className="text-center">
-          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white-500 mx-auto mb-4">
-            <img 
-              src="/images/developer2.jpg" 
-              alt="Developer 2" 
-              className="w-full h-full object-cover"
-            />
-          </div>
           <h5 className="font-semibold">Tabassum Kabir</h5>
           <p className="text-gray-400 text-sm">Frontend Specialist</p>
           <p className="text-gray-400 text-sm">sanzidaakter@gmail.com</p>
