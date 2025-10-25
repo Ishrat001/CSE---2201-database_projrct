@@ -116,43 +116,21 @@ export default function EmployeeLandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 overflow-hidden">
-        <div className="absolute -inset-10 opacity-20">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse"
-              style={{
-                width: Math.random() * 100 + 50,
-                height: Math.random() * 100 + 50,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${Math.random() * 10 + 10}s`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex">
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-all duration-500 ease-in-out bg-gradient-to-b from-slate-800 to-slate-900 shadow-2xl w-80 z-50 border-r border-purple-500/20`}
+        } transition-transform duration-300 ease-in-out bg-gradient-to-b from-black to-balck shadow-xl w-64 z-50`}
       >
-        <div className="flex justify-between items-center p-6 border-b border-purple-500/20">
-          <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Navigation Menu
-          </h2>
+        <div className="flex justify-between items-center p-5 border-b border-gray-700">
+          <h2 className="text-xl font-bold text-white">Navigation Menu</h2>
           <XMarkIcon
-            className="h-6 w-6 cursor-pointer text-purple-400 hover:text-white transition-colors"
+            className="h-6 w-6 cursor-pointer text-white"
             onClick={() => setSidebarOpen(false)}
           />
         </div>
-        <nav className="flex flex-col p-6 space-y-4">
+        <nav className="flex flex-col p-4 space-y-3 mt-4">
           {[
             { name: "Inventory", icon: CubeIcon, path: "/employee/inventory" },
             { name: "Orders", icon: TruckIcon, path: "/employee/orders" },
@@ -161,9 +139,9 @@ export default function EmployeeLandingPage() {
             <button
               key={item.name}
               onClick={() => router.push(item.path)}
-              className="flex items-center space-x-3 text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group"
+              className="flex items-center space-x-3 text-left px-4 py-3 text-white hover:bg-gray-800 rounded-lg transition-all duration-200 group"
             >
-              <item.icon className="h-5 w-5 text-purple-400 group-hover:text-purple-300" />
+              <item.icon className="h-5 w-5 text-white group-hover:text-purple-300" />
               <span className="text-white group-hover:text-purple-200 font-medium">{item.name}</span>
             </button>
           ))}
@@ -171,90 +149,108 @@ export default function EmployeeLandingPage() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="flex-1">
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-slate-800/80 backdrop-blur-xl border-b border-purple-500/20">
-          <div className="flex justify-between items-center px-8 py-4">
-            {/* Hamburger */}
-            <Bars3Icon
-              className="h-8 w-8 text-purple-400 cursor-pointer hover:text-white transition-colors hover:scale-110 transform duration-200"
-              onClick={() => setSidebarOpen(true)}
-            />
+        <header className="flex justify-between items-center px-6 py-4 bg-white shadow-md sticky top-0 z-40">
+          {/* Hamburger */}
+          <Bars3Icon
+            className="h-8 w-8 text-indigo-600 cursor-pointer hover:text-purple-600 transition-colors"
+            onClick={() => setSidebarOpen(true)}
+          />
 
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
-              SCM Employee Dashboard
-            </h1>
+          <h1 className="text-2xl font-bold text-gray-800 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            SCM Employee Dashboard
+          </h1>
 
-            {/* Account */}
-            <div className="relative">
-              <UserCircleIcon
-                className="h-12 w-12 text-purple-400 hover:text-white cursor-pointer transition-all duration-300 hover:scale-110"
-                onClick={() => setAccountModalOpen(!accountModalOpen)}
-              />
-              {accountModalOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-xl border border-purple-500/30 rounded-2xl shadow-2xl p-4 animate-in fade-in zoom-in duration-300">
-                  <p className="text-white font-semibold mb-2">Account Info</p>
-                  <p className="text-sm text-purple-300 mb-4">employee@example.com</p>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full bg-gradient-to-r from-red-500 to-pink-600 text-white py-2 rounded-xl hover:from-red-600 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 font-semibold"
-                  >
-                    Logout
-                  </button>
+          {/* Account */}
+          <div className="relative">
+            <button
+              onClick={() => setAccountModalOpen(!accountModalOpen)}
+              className="flex items-center space-x-2 text-gray-700 hover:text-indigo-600 transition-colors group"
+            >
+              <UserCircleIcon className="h-8 w-8 group-hover:scale-110 transition-transform" />
+              <span className="font-medium">Account</span>
+            </button>
+            
+            {accountModalOpen && (
+              <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl p-5 z-50 border border-gray-200">
+                <h3 className="font-bold text-lg mb-3 text-gray-800 border-b pb-2">Account Information</h3>
+                <div className="space-y-2 mb-4">
+                  <p className="text-sm flex items-center gap-2">
+                    <span className="font-medium text-gray-600">Email:</span> 
+                    <span className="text-gray-800">ishratcsedu29@gmail.com</span>
+                  </p>
+                  <p className="text-sm flex items-center gap-2">
+                    <span className="font-medium text-gray-600">Role:</span> 
+                    <span className="text-gray-800">Employee</span>
+                  </p>
                 </div>
-              )}
-            </div>
+                <button
+                  onClick={handleLogout}
+                  className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-2.5 rounded-lg font-medium hover:from-purple-600 hover:to-purple-700 transition-all shadow-md"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </header>
 
-        {/* Hero Section */}
-        <section className="relative py-20 px-6 overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
-            style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80")',
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-purple-900/80 to-slate-900/90 backdrop-blur-sm" />
-          </div>
-          
-          <div className="relative z-10 text-center max-w-4xl mx-auto">
-            <h2 className="text-6xl font-bold text-white mb-6 leading-tight animate-in slide-in-from-bottom duration-1000">
-              Welcome Back, <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Employee!</span>
+        {/* Hero Section with Fixed Background */}
+        <section
+          className="relative flex flex-col items-center justify-center text-center py-24 px-6"
+          style={{
+            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.pinimg.com/736x/0e/1a/14/0e1a1429bfd893aa8fb7eb978fb448dc.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          <div className="relative z-10 max-w-3xl">
+            <h2 className="text-5xl font-bold text-white mb-5">
+              Welcome Back!!!
             </h2>
-            <p className="text-xl text-purple-200 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-100 mb-8 max-w-2xl mx-auto leading-relaxed">
               Track orders and warehouse inventory in real-time with our advanced supply chain management system
             </p>
+            <button
+              onClick={() => router.push("/employee/orders")}
+              className="bg-white text-indigo-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+            >
+              View Orders
+            </button>
+          </div>
+        </section>
 
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              {[
-                { label: "Total Orders", value: stats.totalOrders, icon: TruckIcon, color: "from-blue-500 to-cyan-500" },
-                { label: "Total Inventory", value: stats.totalInventory, icon: CubeIcon, color: "from-purple-500 to-pink-500" },
-                { label: "Active Warehouses", value: stats.activeWarehouses, icon: ChartBarIcon, color: "from-green-500 to-teal-500" },
-              ].map((stat, index) => (
-                <div 
-                  key={stat.label}
-                  className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-purple-500/30 transition-all duration-500 hover:scale-105 group"
-                >
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <stat.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-2">{stat.value}</h3>
-                  <p className="text-purple-300 font-medium">{stat.label}</p>
+        {/* Stats Cards */}
+        <section className="max-w-6xl mx-auto px-6 py-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { label: "Total Orders", value: stats.totalOrders, icon: TruckIcon, color: "from-blue-500 to-cyan-500" },
+              { label: "Total Inventory", value: stats.totalInventory, icon: CubeIcon, color: "from-purple-500 to-pink-500" },
+              { label: "Active Warehouses", value: stats.activeWarehouses, icon: ChartBarIcon, color: "from-green-500 to-teal-500" },
+            ].map((stat, index) => (
+              <div 
+                key={stat.label}
+                className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-all duration-500 hover:scale-105 group"
+              >
+                <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <stat.icon className="h-8 w-8 text-white" />
                 </div>
-              ))}
-            </div>
+                <h3 className="text-4xl font-bold text-gray-800 mb-2">{stat.value}</h3>
+                <p className="text-lg text-gray-600 font-medium">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Charts Section */}
-        <section className="relative px-6 pb-20 -mt-10">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section className="max-w-7xl mx-auto px-6 pb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Orders Pie Chart */}
-            <div className="bg-slate-800/60 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/10 hover:border-purple-500/30 transition-all duration-500 group">
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <TruckIcon className="h-6 w-6 text-purple-400 mr-3" />
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-all duration-500 group">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <TruckIcon className="h-6 w-6 text-indigo-600 mr-3" />
                 Orders by Status
               </h3>
               <ResponsiveContainer width="100%" height={350}>
@@ -280,11 +276,11 @@ export default function EmployeeLandingPage() {
                   </Pie>
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)', 
-                      border: '1px solid rgba(192, 132, 252, 0.3)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                      border: '1px solid rgba(99, 102, 241, 0.3)',
                       borderRadius: '12px',
                       backdropFilter: 'blur(10px)',
-                      color: 'white'
+                      color: 'black'
                     }} 
                   />
                 </PieChart>
@@ -292,28 +288,27 @@ export default function EmployeeLandingPage() {
             </div>
 
             {/* Warehouse Bar Chart */}
-            <div className="bg-slate-800/60 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/10 hover:border-purple-500/30 transition-all duration-500 group">
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <CubeIcon className="h-6 w-6 text-purple-400 mr-3" />
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-all duration-500 group">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <CubeIcon className="h-6 w-6 text-indigo-600 mr-3" />
                 Products by Warehouse
               </h3>
               <ResponsiveContainer width="100%" height={350}>
                 <BarChart data={warehouseData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
                   
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)', 
-                      border: '1px solid rgba(192, 132, 252, 0.3)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+                      border: '1px solid rgba(99, 102, 241, 0.3)',
                       borderRadius: '12px',
                       backdropFilter: 'blur(10px)',
-                      color: 'white'
+                      color: 'black'
                     }} 
                   />
                   <Bar 
                     dataKey="value" 
                     radius={[8, 8, 0, 0]}
-                    className="hover:scale-105 transition-transform"
                   >
                     {warehouseData.map((_, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -324,6 +319,13 @@ export default function EmployeeLandingPage() {
             </div>
           </div>
         </section>
+
+        {/* Footer */}
+        <footer className="bg-gray-900 text-white py-12 px-6">
+          <div className="max-w-6xl mx-auto text-center">
+            <p className="text-gray-400">© {new Date().getFullYear()} Supply Chain Management System. All rights reserved.</p>
+          </div>
+        </footer>
       </div>
     </div>
   );

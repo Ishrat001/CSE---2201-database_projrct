@@ -97,153 +97,172 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="p-6 relative">
-      <h1 className="text-2xl font-bold mb-4">All Products</h1>
+    <div className="min-h-screen bg-white p-6">
+      {/* Main Content */}
+      <div>
+        <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+          Product Management
+        </h1>
 
-      <button
-        className="mb-3 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-        onClick={() => {
-          setFormData({
-            product_id: "",
-            product_name: "",
-            description: "",
-            category: "",
-            unit_price: "",
-          });
-          setIsNew(true);
-          setShowModal(true);
-        }}
-      >
-        Add New Product
-      </button>
+        <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-lg mb-6">
+          <button
+            className="mb-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 font-semibold shadow-md"
+            onClick={() => {
+              setFormData({
+                product_id: "",
+                product_name: "",
+                description: "",
+                category: "",
+                unit_price: "",
+              });
+              setIsNew(true);
+              setShowModal(true);
+            }}
+          >
+            Add New Product
+          </button>
 
-      {message && (
-        <div className="mb-3 p-2 bg-green-100 text-green-800 rounded">{message}</div>
-      )}
+          {message && (
+            <div className={`mb-4 p-3 rounded-lg ${
+              message.includes("❌") 
+                ? "bg-red-100 text-red-800 border border-red-200" 
+                : "bg-green-100 text-green-800 border border-green-200"
+            }`}>
+              {message}
+            </div>
+          )}
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <table className="w-full border-collapse border border-gray-300">
-          <thead className="bg-black-100">
-            <tr>
-              <th className="border p-2">Product ID</th>
-              <th className="border p-2">Name</th>
-              <th className="border p-2">Description</th>
-              <th className="border p-2">Category</th>
-              <th className="border p-2">Unit Price</th>
-              <th className="border p-2 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product, idx) => (
-              <tr key={idx}>
-                <td className="border p-2">{product.product_id}</td>
-                <td className="border p-2">{product.product_name}</td>
-                <td className="border p-2">{product.description}</td>
-                <td className="border p-2">{product.category}</td>
-                <td className="border p-2">{product.unit_price}</td>
-                <td className="border p-2 text-center">
-                <div className="flex justify-center gap-2">
-                  <button
-                    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    onClick={() => {
-                      setFormData({
-                        product_id: product.product_id,
-                        product_name: product.product_name,
-                        description: product.description,
-                        category: product.category,
-                        unit_price: product.unit_price.toString(),
-                      });
-                      setIsNew(false);
-                      setShowModal(true);
-                    }}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                    onClick={() => handleDelete(product.product_id)}
-                  >
-                    Delete
-                  </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+          {loading ? (
+            <div className="text-center py-8">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+              <p className="text-gray-600 mt-2">Loading products...</p>
+            </div>
+          ) : (
+            <div className="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
+              <table className="w-full border-collapse">
+                <thead className="bg-indigo-600">
+                  <tr>
+                    <th className="border border-gray-300 p-3 text-white font-semibold text-left">Product ID</th>
+                    <th className="border border-gray-300 p-3 text-white font-semibold text-left">Name</th>
+                    <th className="border border-gray-300 p-3 text-white font-semibold text-left">Description</th>
+                    <th className="border border-gray-300 p-3 text-white font-semibold text-left">Category</th>
+                    <th className="border border-gray-300 p-3 text-white font-semibold text-left">Unit Price</th>
+                    <th className="border border-gray-300 p-3 text-white font-semibold text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product, idx) => (
+                    <tr key={idx} className="hover:bg-gray-100 transition-colors duration-200">
+                      <td className="border border-gray-300 p-3 text-gray-700 font-mono">{product.product_id}</td>
+                      <td className="border border-gray-300 p-3 text-gray-800 font-medium">{product.product_name}</td>
+                      <td className="border border-gray-300 p-3 text-gray-600">{product.description}</td>
+                      <td className="border border-gray-300 p-3 text-blue-600 font-medium">{product.category}</td>
+                      <td className="border border-gray-300 p-3 text-green-600 font-semibold">${product.unit_price}</td>
+                      <td className="border border-gray-300 p-3 text-center">
+                        <div className="flex justify-center gap-2">
+                          <button
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 font-medium shadow-sm"
+                            onClick={() => {
+                              setFormData({
+                                product_id: product.product_id,
+                                product_name: product.product_name,
+                                description: product.description,
+                                category: product.category,
+                                unit_price: product.unit_price.toString(),
+                              });
+                              setIsNew(false);
+                              setShowModal(true);
+                            }}
+                          >
+                            Update
+                          </button>
+                          <button
+                            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 font-medium shadow-sm"
+                            onClick={() => handleDelete(product.product_id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
 
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 flex justify-center items-center pointer-events-none">
-          <div className="bg-white p-6 rounded-lg w-96 pointer-events-auto shadow-lg z-50">
-            <h2 className="text-xl font-semibold mb-4">
-              {isNew ? "Add Product" : "Update Product"}
-            </h2>
+        {/* Modal */}
+        {showModal && (
+          <div className="fixed inset-0 flex justify-center items-center pointer-events-none z-50">
+            <div className="absolute inset-0 bg-black/50 pointer-events-auto"></div>
+            <div className="bg-white p-6 rounded-2xl w-96 pointer-events-auto shadow-2xl z-50 border border-gray-300">
+              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                {isNew ? "Add Product" : "Update Product"}
+              </h2>
 
-            <input
-              type="text"
-              name="product_id"
-              placeholder="Product ID"
-              value={formData.product_id}
-              onChange={handleChange}
-              readOnly={!isNew}
-              className={`border p-2 mb-3 w-full ${
-                !isNew ? "bg-gray-100 cursor-not-allowed" : ""
-              }`}
-            />
-            <input
-              type="text"
-              name="product_name"
-              placeholder="Product Name"
-              value={formData.product_name}
-              onChange={handleChange}
-              className="border p-2 mb-3 w-full"
-            />
-            <input
-              type="text"
-              name="description"
-              placeholder="Description"
-              value={formData.description}
-              onChange={handleChange}
-              className="border p-2 mb-3 w-full"
-            />
-            <input
-              type="text"
-              name="category"
-              placeholder="Category"
-              value={formData.category}
-              onChange={handleChange}
-              className="border p-2 mb-3 w-full"
-            />
-            <input
-              type="number"
-              name="unit_price"
-              placeholder="Unit Price"
-              value={formData.unit_price}
-              onChange={handleChange}
-              className="border p-2 mb-4 w-full"
-            />
+              <input
+                type="text"
+                name="product_id"
+                placeholder="Product ID"
+                value={formData.product_id}
+                onChange={handleChange}
+                readOnly={!isNew}
+                className={`border border-gray-300 bg-white text-gray-800 p-3 mb-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400 ${
+                  !isNew ? "bg-gray-100 cursor-not-allowed" : ""
+                }`}
+              />
+              <input
+                type="text"
+                name="product_name"
+                placeholder="Product Name"
+                value={formData.product_name}
+                onChange={handleChange}
+                className="border border-gray-300 bg-white text-gray-800 p-3 mb-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
+              />
+              <input
+                type="text"
+                name="description"
+                placeholder="Description"
+                value={formData.description}
+                onChange={handleChange}
+                className="border border-gray-300 bg-white text-gray-800 p-3 mb-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
+              />
+              <input
+                type="text"
+                name="category"
+                placeholder="Category"
+                value={formData.category}
+                onChange={handleChange}
+                className="border border-gray-300 bg-white text-gray-800 p-3 mb-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
+              />
+              <input
+                type="number"
+                name="unit_price"
+                placeholder="Unit Price"
+                value={formData.unit_price}
+                onChange={handleChange}
+                className="border border-gray-300 bg-white text-gray-800 p-3 mb-4 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
+              />
 
-            <div className="flex justify-end gap-2">
-              <button
-                className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500"
-                onClick={() => setShowModal(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                onClick={handleSave}
-              >
-                Save
-              </button>
+              <div className="flex justify-end gap-2">
+                <button
+                  className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-300 font-medium"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 font-medium"
+                  onClick={handleSave}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

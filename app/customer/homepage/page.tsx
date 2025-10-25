@@ -111,7 +111,7 @@ export default function CustomerLandingPage() {
       <div
         className={`fixed inset-y-0 left-0 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out bg-gradient-to-b from-indigo-900 to-purple-800 shadow-xl w-64 z-50`}
+        } transition-transform duration-300 ease-in-out bg-gradient-to-b from-black to-balck shadow-xl w-64 z-50`}
       >
         <div className="flex justify-between items-center p-5 border-b border-indigo-700">
           <h2 className="text-xl font-bold text-white">Navigation</h2>
@@ -329,9 +329,8 @@ export default function CustomerLandingPage() {
             </motion.div>
           </div>
         </section>
-
         {/* Footer */}
-        <footer className="bg-gray-900 text-white py-12 px-6">
+          <footer className="bg-gray-900 text-white py-12 px-6">
           <div className="max-w-6xl mx-auto text-center">
             <p className="text-gray-400">© {new Date().getFullYear()} Supply Chain Management System. All rights reserved.</p>
           </div>

@@ -91,7 +91,7 @@ export default function AuthModal() {
     <div className="w-full max-w-md bg backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-white/30 relative">
       
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-white/10 backdrop-blur-[1px]"></div>
+      <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px]"></div>
 
       {/* Header Content */}
       <div className="relative z-10 p-6">
@@ -204,6 +204,4 @@ export default function AuthModal() {
     `}</style>
   </div>
 );
-
-
 }

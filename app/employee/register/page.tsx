@@ -87,10 +87,8 @@ export default function AuthModal() {
           backgroundAttachment: "fixed",
         }}
       >
-      {/* Main Content Box - Directly on Background */}
+      {/* Main Content Box*/}
       <div className="w-full max-w-md bg backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-white/30">
-        
-        {/* Header with Gradient Overlay */}
         <div 
           className="p-6 text-white relative bg-cover bg-center" 
         ></div>
